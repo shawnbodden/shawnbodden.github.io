@@ -188,7 +188,7 @@
       const centerY = window.innerHeight / 2;
 
       layers.forEach((layer, index) => {
-      const baseLayerSpeed = baseSpeed[index] || 10;
+      const baseLayerSpeed = moveSpeed[index] || 10;
 
       // Add random variance to each layer's movement
       const randomVarianceX = (Math.random() - 0.5) * 2; // Random variance between [-1, 1]
