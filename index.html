@@ -188,7 +188,7 @@
   <script>
     /* Add interactivity to animation layers */
 const layers = document.querySelectorAll('.animation-layer img');
-const moveSpeed = [1, 1, 1, 1]; // Custom speeds for each layer
+const moveSpeed = [10, 10, 10, 10]; // Custom speeds for each layer
 
 // Track global animation state
 let mouseX = 0, mouseY = 0;
@@ -197,10 +197,10 @@ let centerX = window.innerWidth / 2;
 let centerY = window.innerHeight / 2;
 
 // Animation configuration
-const slowDriftSpeed = .1; // Floating speed (smaller = slower)
-const driftMagnitude = 20; // How far the layers float
-const mouseMoveFactor = 4; // Amplify mouse movement responsiveness
-const rotationFactor = .1; // Rotate more dynamically with mouse movement
+const slowDriftSpeed = .01; // Floating speed (smaller = slower)
+const driftMagnitude = 10; // How far the layers float
+const mouseMoveFactor = 10; // Amplify mouse movement responsiveness
+const rotationFactor = .01; // Rotate more dynamically with mouse movement
 const mouseEaseSpeed = 0.05; // How quickly movement catches up to the mouse
 
 // Update center dimensions on window resize
