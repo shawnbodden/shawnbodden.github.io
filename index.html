@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +23,7 @@
         align-items: center;
         height: 100vh;
         overflow: hidden;
+        padding: 0 5%; /* Add padding for responsiveness */
       }
       
       .about {
@@ -32,12 +33,16 @@
 
       .gallery {
         display: flex;
-        gap: 20px;
+        gap: 5%; /* Use percentage-based gap for responsiveness */
+        flex-wrap: wrap; /* Enable wrapping for small screens */
+        justify-content: center; /* Center-align items */
       }
 
       .gallery a img {
-        width: 120px;
-        height: 120px;
+        width: 20vw; /* Make width responsive to viewport width */
+        height: 20vw; /* Keep height proportional to width for square images */
+        max-width: 120px; /* Ensure it doesn’t get too big on larger screens */
+        max-height: 120px;
         object-fit: cover;
         border-radius: 10%;
         transition: transform 0.2s ease-in-out;
@@ -47,6 +52,21 @@
         transform: scale(1.1);
       }
 
+      /* Media query for screens narrower than 600px */
+      @media (max-width: 600px) {
+        .gallery a img {
+          width: 30vw; /* Increase size slightly on smaller devices */
+          height: 30vw;
+        }
+
+        .about {
+          font-size: 14px; /* Adjust text size */
+        }
+
+        .container {
+          padding: 0 10px; /* Reduce padding further on smaller devices */
+        }
+      }
   </style>
 </head>
 <body>
