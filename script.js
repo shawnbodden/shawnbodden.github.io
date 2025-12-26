@@ -85,6 +85,11 @@ class ScrollAnimator {
         const triangles = document.querySelectorAll('.triangle');
         
         triangles.forEach((triangle, index) => {
+            // Skip triangles that are part of animated elements to avoid conflicts
+            if (triangle.closest('[data-scroll]') && !triangle.classList.contains('animated')) {
+                return;
+            }
+            
             // Different speed for each triangle
             const speed = 0.3 + (index * 0.1);
             const yPos = -(scrolled * speed);
@@ -98,14 +103,23 @@ class ScrollAnimator {
     }
     
     getRotationFromMatrix(matrix) {
-        if (matrix === 'none') return 0;
+        if (matrix === 'none' || !matrix) return 0;
         
-        const values = matrix.split('(')[1].split(')')[0].split(',');
-        const a = values[0];
-        const b = values[1];
-        const angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
-        
-        return angle;
+        try {
+            const values = matrix.split('(')[1].split(')')[0].split(',');
+            if (values.length < 2) return 0;
+            
+            const a = parseFloat(values[0]);
+            const b = parseFloat(values[1]);
+            
+            if (isNaN(a) || isNaN(b)) return 0;
+            
+            const angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+            return angle;
+        } catch (e) {
+            console.warn('Failed to parse transform matrix:', matrix);
+            return 0;
+        }
     }
     
     refresh() {
