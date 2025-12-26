@@ -179,38 +179,73 @@
 
   <script>
     /* Add interactivity to animation layers using mouse movement */
-    const layers = document.querySelectorAll('.animation-layer img');
-    const moveSpeed = [10, 20, 15]; // Custom speeds for each layer
+const layers = document.querySelectorAll('.animation-layer img');
+const moveSpeed = [10, 20, 15]; // Custom speeds for each layer
 
-    document.addEventListener('mousemove', (e) => {
-      const { clientX: mouseX, clientY: mouseY } = e;
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
+// Track the current mouse position
+let mouseX = 0;
+let mouseY = 0;
+let centerX = window.innerWidth / 2;
+let centerY = window.innerHeight / 2;
 
-      layers.forEach((layer, index) => {
-      const baseLayerSpeed = moveSpeed[index] || 10;
+// Smooth jitter configuration
+const jitterAmount = 10; // Maximum jitter movement in pixels
+const rotationSpeed = 2; // Rotation factor
+let jitterX = 0;
+let jitterY = 0;
 
-      // Add random variance to each layer's movement
-      const randomVarianceX = (Math.random() - 0.5) * 2; // Random variance between [-1, 1]
-      const randomVarianceY = (Math.random() - 0.5) * 2;
+// Pre-calculate jitter values for smoothing
+function updateJitter() {
+  jitterX = (Math.random() - 0.5) * jitterAmount;
+  jitterY = (Math.random() - 0.5) * jitterAmount;
+  setTimeout(updateJitter, 200); // Update jitter every 200ms
+}
+updateJitter();
 
-      const offsetX = (((mouseX - centerX) / centerX) * baseLayerSpeed) + randomVarianceX;
-      const offsetY = (((mouseY - centerY) / centerY) * baseLayerSpeed) + randomVarianceY;
+// Update center dimensions on window resize (responsive setup)
+window.addEventListener('resize', () => {
+  centerX = window.innerWidth / 2;
+  centerY = window.innerHeight / 2;
 
-      // Apply custom behavior like slight rotation
-      const rotation = ((mouseX - centerX) / centerX) * (5 + index); // Add layer-specific rotation
+  // Stabilize offsets during resize
+  jitterX = jitterY = 0;
+  mouseX = centerX;
+  mouseY = centerY;
+});
 
-        layer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      });
-    });
-    // Optional: Animate layer positions automatically, even without mouse movement
-  setInterval(() => {
-    layers.forEach((layer, index) => {
-      const jitterX = (Math.random() - 0.5) * 10; // Jitter movement in x-direction
-      const jitterY = (Math.random() - 0.5) * 10; // Jitter movement in y-direction
-      layer.style.transform += ` translate(${jitterX}px, ${jitterY}px)`;
-    });
-  }, 1000); // Update every second
+// Track mouse position
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+// Animation function (called repeatedly to update positions)
+function animateLayers() {
+  const normalizedMouseX = (mouseX - centerX) / centerX;
+  const normalizedMouseY = (mouseY - centerY) / centerY;
+
+  layers.forEach((layer, index) => {
+    // Handle undefined moveSpeed values
+    const baseLayerSpeed = moveSpeed[index] || 10;
+
+    const offsetX = normalizedMouseX * baseLayerSpeed + jitterX;
+    const offsetY = normalizedMouseY * baseLayerSpeed + jitterY;
+
+    const rotation = normalizedMouseX * rotationSpeed; // Use stable rotation
+
+    // Apply combined transform
+    layer.style.transform = `
+      translate(${offsetX}px, ${offsetY}px)
+      rotate(${rotation}deg)
+    `;
+  });
+
+  // Request the next frame for smooth animation
+  requestAnimationFrame(animateLayers);
+}
+
+// Start the animation
+animateLayers();
   </script>
 </body>
 
