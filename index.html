@@ -197,7 +197,7 @@ let centerX = window.innerWidth / 2;
 let centerY = window.innerHeight / 2;
 
 // Animation configuration
-const slowDriftSpeed = 1; // Floating speed (smaller = slower)
+const slowDriftSpeed = .1; // Floating speed (smaller = slower)
 const driftMagnitude = 20; // How far the layers float
 const mouseMoveFactor = 4; // Amplify mouse movement responsiveness
 const rotationFactor = .1; // Rotate more dynamically with mouse movement
@@ -231,8 +231,8 @@ function animateLayers() {
     const baseSpeed = moveSpeed[index] || 10;
 
     // Independent floating movement (slow drift)
-    const driftX = Math.sin(time / (index + 1)) * driftMagnitude; // Slow oscillating X
-    const driftY = Math.cos(time / (index + 1)) * driftMagnitude; // Slow oscillating Y
+    const driftX = Math.sin(time / (index + 1)*5) * driftMagnitude; // Slow oscillating X
+    const driftY = Math.cos(time / (index + 1)*5) * driftMagnitude; // Slow oscillating Y
 
     // Mouse responsive movement (amplified for drama)
     const mouseOffsetX = normalizedMouseX * baseSpeed * mouseMoveFactor;
