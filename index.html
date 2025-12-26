@@ -178,39 +178,27 @@
   </div>
 
   <script>
-    /* Add interactivity to animation layers using mouse movement */
+    /* Add interactivity to animation layers */
 const layers = document.querySelectorAll('.animation-layer img');
 const moveSpeed = [10, 20, 15]; // Custom speeds for each layer
 
-// Track the current mouse position
-let mouseX = 0;
-let mouseY = 0;
+// Track global animation state
+let mouseX = 0, mouseY = 0;
+let currentX = 0, currentY = 0;
 let centerX = window.innerWidth / 2;
 let centerY = window.innerHeight / 2;
 
-// Smooth jitter configuration
-const jitterAmount = 10; // Maximum jitter movement in pixels
-const rotationSpeed = 2; // Rotation factor
-let jitterX = 0;
-let jitterY = 0;
+// Animation configuration
+const slowDriftSpeed = 0.5; // Floating speed (smaller = slower)
+const driftMagnitude = 10; // How far the layers float
+const mouseMoveFactor = 1.5; // Amplify mouse movement responsiveness
+const rotationFactor = 5; // Rotate more dynamically with mouse movement
+const mouseEaseSpeed = 0.05; // How quickly movement catches up to the mouse
 
-// Pre-calculate jitter values for smoothing
-function updateJitter() {
-  jitterX = (Math.random() - 0.5) * jitterAmount;
-  jitterY = (Math.random() - 0.5) * jitterAmount;
-  setTimeout(updateJitter, 200); // Update jitter every 200ms
-}
-updateJitter();
-
-// Update center dimensions on window resize (responsive setup)
+// Update center dimensions on window resize
 window.addEventListener('resize', () => {
   centerX = window.innerWidth / 2;
   centerY = window.innerHeight / 2;
-
-  // Stabilize offsets during resize
-  jitterX = jitterY = 0;
-  mouseX = centerX;
-  mouseY = centerY;
 });
 
 // Track mouse position
@@ -219,28 +207,40 @@ document.addEventListener('mousemove', (e) => {
   mouseY = e.clientY;
 });
 
-// Animation function (called repeatedly to update positions)
+// Animation function (called repeatedly)
+let time = 0; // Incremental time for floating animation
 function animateLayers() {
-  const normalizedMouseX = (mouseX - centerX) / centerX;
-  const normalizedMouseY = (mouseY - centerY) / centerY;
+  // Increment time (used for smooth floating/drifting)
+  time += slowDriftSpeed;
+
+  // Smooth mouse movement easing
+  currentX += (mouseX - currentX) * mouseEaseSpeed;
+  currentY += (mouseY - currentY) * mouseEaseSpeed;
+  const normalizedMouseX = (currentX - centerX) / centerX;
+  const normalizedMouseY = (currentY - centerY) / centerY;
 
   layers.forEach((layer, index) => {
-    // Handle undefined moveSpeed values
-    const baseLayerSpeed = moveSpeed[index] || 10;
+    const baseSpeed = moveSpeed[index] || 10;
 
-    const offsetX = normalizedMouseX * baseLayerSpeed + jitterX;
-    const offsetY = normalizedMouseY * baseLayerSpeed + jitterY;
+    // Independent floating movement (slow drift)
+    const driftX = Math.sin(time / (index + 1)) * driftMagnitude; // Slow oscillating X
+    const driftY = Math.cos(time / (index + 1)) * driftMagnitude; // Slow oscillating Y
 
-    const rotation = normalizedMouseX * rotationSpeed; // Use stable rotation
+    // Mouse responsive movement (amplified for drama)
+    const mouseOffsetX = normalizedMouseX * baseSpeed * mouseMoveFactor;
+    const mouseOffsetY = normalizedMouseY * baseSpeed * mouseMoveFactor;
+
+    // Rotation (combines slow drift with mouse responsiveness)
+    const rotation = (normalizedMouseX * rotationFactor) + Math.sin(time / (index + 1)) * 10;
 
     // Apply combined transform
     layer.style.transform = `
-      translate(${offsetX}px, ${offsetY}px)
+      translate(${driftX + mouseOffsetX}px, ${driftY + mouseOffsetY}px)
       rotate(${rotation}deg)
     `;
   });
 
-  // Request the next frame for smooth animation
+  // Request the next frame
   requestAnimationFrame(animateLayers);
 }
 
