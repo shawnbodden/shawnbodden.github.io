@@ -188,13 +188,29 @@
       const centerY = window.innerHeight / 2;
 
       layers.forEach((layer, index) => {
-        const layerSpeed = moveSpeed[index] || 10;
-        const offsetX = ((mouseX - centerX) / centerX) * layerSpeed;
-        const offsetY = ((mouseY - centerY) / centerY) * layerSpeed;
+      const baseLayerSpeed = baseSpeed[index] || 10;
+
+      // Add random variance to each layer's movement
+      const randomVarianceX = (Math.random() - 0.5) * 2; // Random variance between [-1, 1]
+      const randomVarianceY = (Math.random() - 0.5) * 2;
+
+      const offsetX = (((mouseX - centerX) / centerX) * baseLayerSpeed) + randomVarianceX;
+      const offsetY = (((mouseY - centerY) / centerY) * baseLayerSpeed) + randomVarianceY;
+
+      // Apply custom behavior like slight rotation
+      const rotation = ((mouseX - centerX) / centerX) * (5 + index); // Add layer-specific rotation
 
         layer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
       });
     });
+    // Optional: Animate layer positions automatically, even without mouse movement
+  setInterval(() => {
+    layers.forEach((layer, index) => {
+      const jitterX = (Math.random() - 0.5) * 10; // Jitter movement in x-direction
+      const jitterY = (Math.random() - 0.5) * 10; // Jitter movement in y-direction
+      layer.style.transform += ` translate(${jitterX}px, ${jitterY}px)`;
+    });
+  }, 1000); // Update every second
   </script>
 </body>
 
