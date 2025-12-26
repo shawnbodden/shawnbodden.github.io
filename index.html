@@ -118,18 +118,23 @@
 
       /* Customize image positions */
       .animation-layer:nth-child(1) {
-        top: 10%;
+        top: 20%;
         left: 20%;
       }
 
       .animation-layer:nth-child(2) {
-        top: 60%;
-        right: 15%;
+        top: 55%;
+        right: 10%;
       }
 
       .animation-layer:nth-child(3) {
-        bottom: 20%;
+        bottom: 60%;
         left: 10%;
+      }
+
+    .animation-layer:nth-child(4) {
+        top: 70%;
+        left: 35%;
       }
 
       /* Ensure responsiveness for smaller screens */
@@ -153,6 +158,9 @@
     </div>
     <div class="animation-layer">
       <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/Picture4.png">
+    </div>
+    <div class="animation-layer">
+      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/picture%202.png">
     </div>
 
     <div class="about">
@@ -180,7 +188,7 @@
   <script>
     /* Add interactivity to animation layers */
 const layers = document.querySelectorAll('.animation-layer img');
-const moveSpeed = [10, 20, 15]; // Custom speeds for each layer
+const moveSpeed = [10, 20, 15, 25]; // Custom speeds for each layer
 
 // Track global animation state
 let mouseX = 0, mouseY = 0;
