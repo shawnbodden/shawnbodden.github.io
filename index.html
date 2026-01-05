@@ -213,21 +213,16 @@
 
   /* Cover Photo Wrapper */
 .cover-photo {
-  text-align: center; /* Aligns the image in the middle horizontally */
-  margin: 0 auto 20px; /* Center container and add spacing below */
-  max-width: 30%; /* Prevent the container from exceeding 90% of the webpage width */
+  width: 80%; /* Restrict the section container to 80% of its parent (the .academic-content section) */
+  margin: 0 auto; /* Center-align the container in its parent */
 }
 
-/* Cover Photo Image */
 .cover-photo img {
- display: block; /* Prevents inline-level spacing issues */
-  max-width: 100%; /* Constrain width to fit the container */
-  max-height: 300px; /* Limit the height to keep it visually balanced */
-  height: auto; /* Maintain aspect ratio */
-  width: auto; /* Maintain aspect ratio */
-  margin: 0 auto; /* Center image */
-  border-radius: 8px; /* Optional: Add rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for better visuals */
+  width: 100%; /* Take 100% of the parent `.cover-photo` width */
+  max-height: 300px; /* Optional: Set a maximum height to prevent the image from growing too tall */
+  height: auto; /* Maintain the original aspect ratio */
+  border-radius: 8px; /* Optional: Rounded corners for a neat look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better visuals */
 }
 }
     
