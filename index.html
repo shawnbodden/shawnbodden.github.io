@@ -43,6 +43,7 @@
         flex-wrap: nowrap; /* Prevent wrapping by default */
         justify-content: center;
         flex-direction: row; /* Default layout: horizontal line */
+        margin-bottom: 40px; /* Add vertical space below gallery */
       }
     
        .gallery-item {
@@ -93,6 +94,12 @@
         .gallery {
           flex-direction: column; /* Change to a vertical layout */
         }
+
+       @media (max-width: 600px) {
+        .gallery {
+          margin-bottom: 20px; /* Reduce gap for smaller screens */
+            }
+           }
 
         .gallery-item {
           margin-bottom: 15px; /* Add spacing for vertical alignment */
@@ -183,7 +190,7 @@
     <div class="about">
       <h1>Shawn Bodden</h1>
       <p>Hi. I'm building a new personal website. This is what I've got so far, but there will be more soon.</p>
-      <p>For now, you can learn a bit more about who I am and what I do by following the links below. </p>
+      <p>For now, you can learn a bit about who I am and what I do by clicking the buttons below. </p>
     </div>
 
     <div class="gallery">
@@ -193,11 +200,11 @@
       </button>
       <button data-content="freelance" class="gallery-item">
       <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/DSC_0119.JPG" alt="Freelance Services">
-        <span>Freelance Services</span>
+        <span>Freelance Work</span>
       </button>
       <button data-content="atlas" class="gallery-item">
       <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/IMG_20190719_135419.jpg" alt="Community Atlas">
-        <span>Community Atlas</span>
+        <span>Community Spaces Atlas</span>
       </button>
     </div>
 
