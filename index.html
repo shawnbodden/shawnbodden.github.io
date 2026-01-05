@@ -7,145 +7,138 @@
   <title>Shawn Bodden - Animated Background</title>
   <link href="styles.css" rel="stylesheet">
   <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Crimson Pro', serif;
+      height: 100%;
+      overflow: hidden; /* Hide scrollbars for full viewport effect */
+    }
+
+    .container {
+      position: relative; /* Context for absolutely positioned children */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Align content near top */
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+      max-width: 1200px; /* Constrain content width */
+      margin: 0 auto; /* Center horizontally */
+      padding: 20px;
+      overflow: hidden; /* Contain animations */
+    }
+
+    .about {
+      text-align: center;
+      margin-bottom: 20px;
+      z-index: 1; /* Keep above animations */
+    }
+
+    .about h1 {
+      font-size: 2em;
+      color: #333;
+    }
+
+    .about p {
+      margin-top: 10px;
+      color: #555;
+      font-size: 1.2em;
+    }
+
+    .gallery {
+      display: flex;
+      gap: 20px; /* Space between links */
+      flex-wrap: wrap; /* Wrap items when needed */
+      justify-content: center;
+      z-index: 1; /* Keep above animations */
+      margin-top: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      flex-direction: column;
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10%;
+      object-fit: cover;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.1); /* Animation effect for hover */
+    }
+
+    .gallery-item span {
+      position: absolute;
+      bottom: 10%; /* Slightly above container's bottom edge */
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Readability */
+      pointer-events: none;
+    }
+
+    .animation-layer {
+      position: absolute;
+      will-change: transform;
+      pointer-events: none; /* Prevent interference */
+      z-index: 0; /* Below hero and gallery content */
+    }
+
+    .animation-layer img {
+      width: 15vw; /* Relative width */
+      max-width: 200px; /* Ensure it doesn’t get too big on large screens */
+      height: auto; /* Maintain aspect ratio */
+      opacity: 0.8;
+      border-radius: 10%;
+      transition: transform 0.2s ease-out;
+    }
+
+    /* Adjust positions for animations */
+    .animation-layer:nth-child(1) { top: 20%; left: 25%; }
+    .animation-layer:nth-child(2) { top: 50%; left: 70%; }
+    .animation-layer:nth-child(3) { top: 70%; left: 40%; }
+    .animation-layer:nth-child(4) { top: 10%; left: 60%; }
+
+    /* Mobile-friendly adjustments */
+    @media (max-width: 600px) {
+      .about h1 {
+        font-size: 1.5em;
       }
 
-      html, body {
-        font-family: 'Crimson Pro', serif;
-        overflow: hidden; /* Hide scrollbars for full viewport effect */
-      }
-
-      .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding: 0 5%; /* Add padding for responsiveness */
-        position: relative; /* Context for absolutely positioned items */
-        overflow: hidden; /* Contain animated background images */
-      }
-      .about {
-        text-align: center;
-        margin-bottom: 20px;
+      .about p {
+        font-size: 1em;
       }
 
       .gallery {
-        display: flex;
-        gap: 5%; /* Use percentage-based gap for responsiveness */
-        flex-wrap: nowrap; /* Prevent wrapping by default */
         justify-content: center;
-        flex-direction: row; /* Default layout: horizontal line */
+        gap: 10px;
       }
 
       .gallery-item {
-        position: relative; /* Make this a positioned container for text overlay */
-        display: block; /* Ensure correct layout */
-      }
-
-      .gallery-item img {
-        width: 20vw; /* Make width responsive to viewport width */
-        height: 20vw; /* Keep height proportional to width for square images */
-        max-width: 120px; /* Ensure it doesn’t get too big on larger screens */
-        max-height: 120px;
-        object-fit: cover;
-        border-radius: 10%;
-        transition: transform 0.2s ease-in-out;
-      }
-
-      .gallery-item img:hover {
-        transform: scale(1.1);
-      }
-
-      .gallery-item span {
-        position: absolute; /* Position text on top of the image */
-        top: 65%; /* lowered slightly */
-        left: 50%; /* Center horizontally */
-        transform: translate(-50%, -50%); /* Offset by 50% to align center */
-        color: white; /* Text color */
-        font-size: 14px; /* Text size */
-        font-weight: bold;
-        text-align: center;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Give text some shadow for better readability */
-        pointer-events: none; /* Make the text unclickable */
-      }
-
-      /* Media query for screens narrower than 600px */
-      @media (max-width: 600px) {
-        .gallery {
-          flex-direction: column; /* Change to a vertical layout */
-        }
-
-        .gallery-item {
-          margin-bottom: 15px; /* Add spacing for vertical alignment */
-        }
-
-        .gallery-item img {
-          width: 30vw; /* Increase size slightly on smaller devices */
-          height: 30vw;
-        }
-
-        .about {
-          font-size: 14px;
-        }
-
-        .container {
-          padding: 0 10px;
-        }
-      }
-    
-      /* Add background animation elements */
-      .animation-layer {
-        position: absolute;
-        pointer-events: none; /* Prevent interaction with these elements */
-        will-change: transform; /* Optimize repainting for smooth performance */
+        width: 80px;
+        height: 80px;
       }
 
       .animation-layer img {
-        display: block;
-        max-width: 200px; /* Ensure responsive sizing for images */
-        max-height: 200px;
-        width: 15vw; /* Responsive to viewport width */
-        height: auto; /* Maintain aspect ratio */
-        border-radius: 10%; /* Optional: Add rounded corners */
-        object-fit: cover; /* Ensure image covers its container */
-        transition: transform 0.1s ease-out; /* Add smooth motion effect */
-        opacity: 0.9; /* Add transparency to images */
+        width: 25vw; /* Smaller floating elements */
+        max-width: 120px;
       }
-
-      /* Customize image positions */
-      .animation-layer:nth-child(1) {
-        top: 65%;
-        left: 30%;
-      }
-
-      .animation-layer:nth-child(2) {
-        top: 60%;
-        right: 10%;
-      }
-
-      .animation-layer:nth-child(3) {
-        top: 30%;
-        left: 15%;
-      }
-
-    .animation-layer:nth-child(4) {
-        top: 70%;
-        left: 45%;
-      }
-
-      /* Ensure responsiveness for smaller screens */
-      @media (max-width: 600px) {
-        .animation-layer img {
-          max-width: 200px;
-          max-height: 200px;
-          width: 30vw; /* Increase relative size for viewport width */
-    height: auto; /* Maintain the aspect ratio */
-        }
-      }
+    }
   </style>
 </head>
 
@@ -153,31 +146,33 @@
   <div class="container">
     <!-- Animated background images -->
     <div class="animation-layer">
-      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/transpapalrajz%20(1).png">
+      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/transpapalrajz%20(1).png" alt="Floating Animation">
     </div>
     <div class="animation-layer">
-      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/Picture1.png">
+      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/Picture1.png" alt="Floating Animation">
     </div>
     <div class="animation-layer">
-      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/Picture4.png">
+      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/Picture4.png" alt="Floating Animation">
     </div>
     <div class="animation-layer">
-      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/Picture3.png">
+      <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/Picture3.png" alt="Floating Animation">
     </div>
 
+    <!-- Hero Section -->
     <div class="about">
       <h1>Shawn Bodden</h1>
       <p>Hi. I'm building a new personal website. This is what I've got so far, but there will be more soon.</p>
-      <p>For now, you can learn a bit more about who I am and what I do by following the links below. </p>
+      <p>You can learn more about who I am and what I do by following the links below.</p>
     </div>
 
+    <!-- Gallery Section -->
     <div class="gallery">
       <a href="https://www.sps.ed.ac.uk/staff/shawn-bodden" target="_blank" class="gallery-item">
-        <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/IMG_20190220_141314.jpg" alt="Shawn's Twitter">
+        <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/IMG_20190220_141314.jpg" alt="Shawn's Profile">
         <span>Profile</span>
       </a>
       <a href="https://shawnbodden.substack.com/" target="_blank" class="gallery-item">
-        <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/DSC_0119.JPG" alt="Shawn's GitHub">
+        <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/DSC_0119.JPG" alt="Shawn's Substack">
         <span>Substack</span>
       </a>
       <a href="https://www.linkedin.com/in/shawn-bodden-87674a250/?originalSubdomain=uk" target="_blank" class="gallery-item">
@@ -189,74 +184,40 @@
 
   <script>
     /* Add interactivity to animation layers */
-const layers = document.querySelectorAll('.animation-layer img');
-const moveSpeed = [5, 10, 16, 20]; // Custom speeds for each layer
+    const layers = document.querySelectorAll('.animation-layer img');
+    const moveSpeed = [5, 10, 16, 20]; // Custom speeds for layers
+    
+    let mouseX = 0, mouseY = 0;
+    let currentX = 0, currentY = 0;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
 
-// Track global animation state
-let mouseX = 0, mouseY = 0;
-let currentX = 0, currentY = 0;
-let centerX = window.innerWidth / 2;
-let centerY = window.innerHeight / 2;
+    // Update mouse position
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-// Animation configuration
-const slowDriftSpeed = .001; // Floating speed (smaller = slower)
-const driftMagnitude = 30; // How far the layers float
-const mouseMoveFactor = 10; // Amplify mouse movement responsiveness
-const rotationFactor = .01; // Rotate more dynamically with mouse movement
-const mouseEaseSpeed = 0.05; // How quickly movement catches up to the mouse
+    // Animate layers
+    function animateLayers() {
+      currentX += (mouseX - currentX) * 0.05;
+      currentY += (mouseY - currentY) * 0.05;
 
-// Update center dimensions on window resize
-window.addEventListener('resize', () => {
-  centerX = window.innerWidth / 2;
-  centerY = window.innerHeight / 2;
-});
+      const normalizedX = (currentX - centerX) / centerX;
+      const normalizedY = (currentY - centerY) / centerY;
 
-// Track mouse position
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+      layers.forEach((layer, index) => {
+        const speed = moveSpeed[index] || 10;
+        const offsetX = normalizedX * speed;
+        const offsetY = normalizedY * speed;
 
-// Animation function (called repeatedly)
-let time = 0; // Incremental time for floating animation
-function animateLayers() {
-  // Increment time (used for smooth floating/drifting)
-  time += slowDriftSpeed;
+        layer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      });
 
-  // Smooth mouse movement easing
-  currentX += (mouseX - currentX) * mouseEaseSpeed;
-  currentY += (mouseY - currentY) * mouseEaseSpeed;
-  const normalizedMouseX = (currentX - centerX) / centerX;
-  const normalizedMouseY = (currentY - centerY) / centerY;
+      requestAnimationFrame(animateLayers);
+    }
 
-  layers.forEach((layer, index) => {
-    const baseSpeed = moveSpeed[index] || 10;
-
-    // Independent floating movement (slow drift)
-    const driftX = Math.sin(time / (index + 1)*5) * driftMagnitude; // Slow oscillating X
-    const driftY = Math.cos(time / (index + 1)*5) * driftMagnitude; // Slow oscillating Y
-
-    // Mouse responsive movement (amplified for drama)
-    const mouseOffsetX = normalizedMouseX * baseSpeed * mouseMoveFactor;
-    const mouseOffsetY = normalizedMouseY * baseSpeed * mouseMoveFactor;
-
-    // Rotation (combines slow drift with mouse responsiveness)
-    const rotation = (normalizedMouseX * rotationFactor) + Math.sin(time / (index + 1)) * 10;
-
-    // Apply combined transform
-    layer.style.transform = `
-      translate(${driftX + mouseOffsetX}px, ${driftY + mouseOffsetY}px)
-      rotate(${rotation}deg)
-    `;
-  });
-
-  // Request the next frame
-  requestAnimationFrame(animateLayers);
-}
-
-// Start the animation
-animateLayers();
+    animateLayers();
   </script>
 </body>
-
 </html>
