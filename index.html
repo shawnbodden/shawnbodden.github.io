@@ -220,10 +220,12 @@
 
 /* Cover Photo Image */
 .cover-photo img {
-  max-width: 100%; /* Ensure it doesn't exceed container width */
-  height: auto;    /* Maintain aspect ratio */
+  ax-width: 80%; /* Constrain the image width to 80% of its container */
+  max-height: 300px; /* Set a maximum height to avoid overly large images */
+  height: auto; /* Maintain the image's aspect ratio */
+  width: auto;  /* Maintain the image's aspect ratio */
   border-radius: 8px; /* Optional: Add rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a soft shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a soft shadow */
 }
 }
     
