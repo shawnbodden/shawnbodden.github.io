@@ -35,98 +35,89 @@
         margin-bottom: 20px;
       }
 
-      .gallery {
-        display: flex;
-        gap: 5%; /* Use percentage-based gap for responsiveness */
-        flex-wrap: nowrap; /* Prevent wrapping by default */
-        justify-content: center;
-        flex-direction: row; /* Default layout: horizontal line */
-        margin-bottom: 40px; /* Add vertical space below gallery */
-        position: sticky; /* Sticky gallery */
-        top: 100px; /* Stick to the top of the container or page */
-        background: #fff; /* Ensure a consistent background when scrolling */
-        z-index: 10; /* Ensure the gallery stays above other elements */
-        padding: 10px 0; /* Add padding for better spacing */
-      }
-    
-       .gallery-item {
-        background: none; /* Remove the default button background */
-        border: none;     /* Remove default button border */
-        padding: 0;       /* Remove default button padding */
-      }
-    
-      .gallery-item {
-        position: relative; /* Make this a positioned container for text overlay */
-        display: block; /* Ensure correct layout */
-      }
+  /* Gallery Styles */
+.gallery {
+  display: flex;
+  gap: 5%; /* Add space between gallery items */
+  flex-wrap: nowrap; /* Prevent wrapping by default */
+  justify-content: center; /* Center-align gallery items */
+  flex-direction: row; /* Horizontal layout */
+  margin-bottom: 40px; /* Add space below the gallery */
+  position: sticky; /* Keeps the gallery in view when scrolling */
+  top: 100px; /* Sticks 100px below the viewport top */
+  background: #fff; /* Background for sticky appearance */
+  z-index: 10; /* Ensure gallery stays above other content */
+  padding: 10px 0; /* Vertical padding for better spacing */
+}
 
-      .gallery-item img {
-        width: 20vw; /* Make width responsive to viewport width */
-        height: 20vw; /* Keep height proportional to width for square images */
-        max-width: 120px; /* Ensure it doesn’t get too big on larger screens */
-        max-height: 120px;
-        object-fit: cover;
-        border-radius: 10%;
-        transition: transform 0.2s ease-in-out;
-      }
+.gallery-item {
+  background: none; /* Remove the default button background */
+  border: none; /* Remove default button borders */
+  padding: 0; /* Remove default button padding */
+  position: relative; /* For properly positioning child content like text overlay */
+  display: block; /* Makes the button behave like a block container */
+  cursor: pointer; /* Add pointer cursor for better UX */
+}
 
-      .gallery-item img:hover {
-        transform: scale(1.1);
-      }
+/* Gallery Items - Images */
+.gallery-item img {
+  width: 20vw; /* Responsive width based on viewport */
+  height: 20vw; /* Keep a square shape */
+  max-width: 120px; /* Restrict maximum width on larger screens */
+  max-height: 120px; /* Restrict maximum height */
+  object-fit: cover; /* Maintain aspect ratio and crop if necessary */
+  border-radius: 10%; /* Add rounded corners */
+  transition: transform 0.2s ease-in-out; /* Smooth scaling effect */
+}
 
-      .gallery-item:active {
-        transform: scale(0.95); /* Shrink slightly on click */
-        transition: transform 0.1s ease-out; /* Smooth release */
-      }
-    
-      .gallery-item span {
-        position: absolute; /* Position text on top of the image */
-        top: 65%; /* lowered slightly */
-        left: 50%; /* Center horizontally */
-        transform: translate(-50%, -50%); /* Offset by 50% to align center */
-        color: white; /* Text color */
-        font-size: 14px; /* Text size */
-        font-weight: bold;
-        text-align: center;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Give text some shadow for better readability */
-        pointer-events: none; /* Make the text unclickable */
-      }
+/* On Hover - Enlarge Image Slightly */
+.gallery-item img:hover {
+  transform: scale(1.1); /* Zoom-in effect on hover */
+}
 
-      /* Media query for screens narrower than 600px */
-      @media (max-width: 600px) {
-        .gallery {
-          flex-direction: column; /* Change to a vertical layout */
-        }
+/* On Click/Active State - Shrink Slightly */
+.gallery-item:active img {
+  transform: scale(0.95); /* Shrinks slightly for click feedback */
+  transition: transform 0.1s ease-out; /* Smooth transition back */
+}
 
-       @media (max-width: 600px) {
-        .gallery {
-          margin-bottom: 20px; /* Reduce gap for smaller screens */
-            }
-           }
+/* Overlay Text in Gallery Items */
+.gallery-item span {
+  position: absolute; /* Positioned relative to the parent button */
+  top: 65%; /* Slightly below center position for better alignment */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Correct centering offset */
+  color: white; /* White text */
+  font-size: 14px; /* Font size for overlay text */
+  font-weight: bold; /* Bold for emphasis */
+  text-align: center; /* Center the text */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Adds a shadow for better readability */
+  pointer-events: none; /* Ensure text is not interactable */
+}
 
-        .gallery-item {
-          margin-bottom: 15px; /* Add spacing for vertical alignment */
-        }
+/* Media Query for Small Screens */
+@media (max-width: 600px) {
+  .gallery {
+    flex-direction: column; /* On small screens, make the gallery vertical */
+    margin-bottom: 20px; /* Reduce vertical spacing */
+  }
 
-        .gallery-item img {
-          width: 30vw; /* Increase size slightly on smaller devices */
-          height: 30vw;
-        }
+  .gallery-item {
+    margin-bottom: 15px; /* Add space between items in vertical layout */
+  }
 
-        .about {
-          font-size: 14px;
-        }
-
-        .container {
-          padding: 0 10px;
-        }
-      }
+  .gallery-item img {
+    width: 30vw; /* Make images slightly larger on smaller devices */
+    height: 30vw;
+  }
+}
     
       /* Add background animation elements */
       .animation-layer {
         position: absolute;
         pointer-events: none; /* Prevent interaction with these elements */
         will-change: transform; /* Optimize repainting for smooth performance */
+        z-index: -1; /* Push the background animations **behind everything** */
       }
 
       .animation-layer img {
@@ -213,20 +204,20 @@
 }
   /* Cover Photo Wrapper */
 .cover-photo {
-  text-align: center; /* Center-align the image */
-  margin-bottom: 20px; /* Add spacing below the image */
+  text-align: center; /* Center-align the image inside the container */
+  margin-bottom: 20px; /* Add spacing below the photo and content beneath it */
 }
 
 .cover-photo img {
-  display: block; /* Prevent inline spacing */
-  width: 20vw; /* Width based on 20% of viewport */
-  height: auto; /* Maintain aspect ratio */
-  max-width: 300px; /* Maximum width for larger screens */
-  max-height: 300px; /* Cap height for balance */
-  object-fit: cover; /* Crop image if necessary to fill the space */
-  border-radius: 10%; /* Add rounded corners */
-  margin: 0 auto; /* Center the image */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  display: block; /* Ensure proper block layout for the image */
+  width: 80%; /* Image scales naturally to 80% of the parent `.cover-photo` width */
+  height: auto; /* Maintain original aspect ratio */
+  max-width: 400px; /* Prevent the image from growing too large on large screens */
+  max-height: 300px; /* Cap the image height for balance */
+  object-fit: cover; /* Crop if necessary to fill the space */
+  border-radius: 10%; /* Optional: Add rounded corners for a polished look */
+  margin: 0 auto; /* Center the image within the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle, professional shadow */
 }
 
     
