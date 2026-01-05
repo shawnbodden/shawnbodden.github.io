@@ -168,6 +168,47 @@
     height: auto; /* Maintain the aspect ratio */
         }
       }
+
+    /* Tabs (Sub-titles) Styling */
+.academic-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.tab {
+  font-size: 16px;
+  color: #555;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.tab:hover {
+  color: #000; /* Highlight text on hover */
+}
+
+.tab.selected {
+  color: #000; /* Highlight selected tab */
+  border-bottom: 2px solid #333; /* Active underline */
+}
+
+/* Academic Portfolio Sub-Content */
+.academic-content {
+  margin-top: 20px; /* Add space between tabs and content */
+}
+
+.tab-content {
+  display: block; /* Default state */
+}
+
+.hidden {
+  display: none; /* Hide inactive content */
+}
+    
   </style>
 </head>
 
@@ -227,7 +268,36 @@
       <section id="academic" class="dynamic-content hidden">
         <h2>Academic Portfolio</h2>
         <p>This section contains information about my academic work, publications, and research projects.</p>
-        <img src="academic-portfolio-image.jpg" alt="Academic Work">
+        <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/IMG_20190220_141314.jpg" alt="Academic Portfolio">
+        <!-- Sub-titles for Publications and Projects -->
+  <div class="academic-tabs">
+    <span id="tab-publications" class="tab selected">Publications</span>
+    <span id="tab-projects" class="tab">Projects</span>
+  </div>
+  
+  <!-- Nested Content: Publications and Projects -->
+  <div class="academic-content">
+    <!-- Publications Section (Default Visible) -->
+    <div id="publications" class="tab-content">
+      <h3>Publications</h3>
+      <ul>
+        <li>Publication 1: Title and details here...</li>
+        <li>Publication 2: Another title here...</li>
+        <li>Publication 3: Description here...</li>
+      </ul>
+    </div>
+
+    <!-- Projects Section (Hidden by Default) -->
+    <div id="projects" class="tab-content hidden">
+      <h3>Projects</h3>
+      <ul>
+        <li>Project 1: Details about a project...</li>
+        <li>Project 2: Another project description...</li>
+        <li>Project 3: Information about a project...</li>
+      </ul>
+    </div>
+  </div>
+</section>
       </section>
 
       <!-- Freelance Services (Hidden by Default) -->
@@ -246,6 +316,31 @@
     </main>    
   </div>
 
+<script>
+  // Select tabs and content sections
+  const tabs = document.querySelectorAll('.tab');
+  const publicationsContent = document.querySelector('#publications');
+  const projectsContent = document.querySelector('#projects');
+
+  // Add click event listeners to tabs
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      // Toggle 'selected' state for the tabs
+      tabs.forEach((t) => t.classList.remove('selected')); // Remove from all tabs
+      tab.classList.add('selected'); // Add to clicked tab
+
+      // Show and hide content based on clicked tab
+      if (tab.id === 'tab-publications') {
+        publicationsContent.classList.remove('hidden'); // Show Publications
+        projectsContent.classList.add('hidden'); // Hide Projects
+      } else if (tab.id === 'tab-projects') {
+        publicationsContent.classList.add('hidden'); // Hide Publications
+        projectsContent.classList.remove('hidden'); // Show Projects
+      }
+    });
+  });
+</script>
+  
 <script>
   // Select all gallery buttons and the dynamic content sections
   const buttons = document.querySelectorAll('.gallery-item');
