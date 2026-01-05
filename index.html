@@ -212,6 +212,20 @@
 
 .hidden {
   display: none; /* Hide inactive content */
+
+  /* Cover Photo Wrapper */
+.cover-photo {
+  text-align: center; /* Center-align the image and content below it */
+  margin-bottom: 20px; /* Add spacing below the image */
+}
+
+/* Cover Photo Image */
+.cover-photo img {
+  max-width: 100%; /* Ensure it doesn't exceed container width */
+  height: auto;    /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a soft shadow for depth */
+}
 }
     
   </style>
@@ -300,6 +314,10 @@
     <!-- Projects Section (Hidden by Default) -->
     <div id="projects" class="tab-content hidden">
       <h3>Projects</h3>
+      <!-- Add the cover photo -->
+  <div class="cover-photo">
+    <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/IMG_20190220_141314.jpg" alt="Academic Portfolio">
+  </div>
       <ul>
         <li>Project 1: Details about a project...</li>
         <li>Project 2: Another project description...</li>
