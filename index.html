@@ -202,22 +202,22 @@
 .hidden {
   display: none; /* Hide inactive content */
 }
-  /* Cover Photo Wrapper */
+ /* Cover Photo Wrapper */
 .cover-photo {
-  text-align: center; /* Center-align the image inside the container */
-  margin-bottom: 20px; /* Add spacing below the photo and content beneath it */
+  margin-bottom: 20px; /* Add space beneath the image */
+  padding-left: 0; /* Remove any unintended left padding */
 }
 
+/* Cover Photo Image */
 .cover-photo img {
-  display: block; /* Ensure proper block layout for the image */
-  width: 80%; /* Image scales naturally to 80% of the parent `.cover-photo` width */
-  height: auto; /* Maintain original aspect ratio */
-  max-width: 400px; /* Prevent the image from growing too large on large screens */
-  max-height: 300px; /* Cap the image height for balance */
-  object-fit: cover; /* Crop if necessary to fill the space */
-  border-radius: 10%; /* Optional: Add rounded corners for a polished look */
-  margin: 0 auto; /* Center the image within the container */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle, professional shadow */
+  display: block; /* Prevent inline spacing */
+  width: 80%; /* Image scales naturally to 80% of its parent section's width */
+  max-width: 400px; /* Cap the image width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Crop if necessary to fill space */
+  border-radius: 10%; /* Optional: Add rounded corners */
+  margin: 0; /* Align with natural text flow (no centering) */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for professionalism */
 }
 
     
