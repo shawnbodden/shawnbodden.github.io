@@ -126,22 +126,26 @@
     
       /* Add background animation elements */
       .animation-layer {
-        position: absolute;
+        position: fixed; /* Make layers part of the viewport background */
         pointer-events: none; /* Prevent interaction with these elements */
         will-change: transform; /* Optimize repainting for smooth performance */
-        z-index: -1; /* Push the background animations **behind everything** */
+        z-index: -1; /* Push the animation layers behind all other content */
+        top: 0; /* Place at the top of the viewport */
+        left: 0; /* Start at the left edge of the viewport */
+        width: 100vw; /* Span the entire viewport width */
+        height: 100vh; /* Span the viewport height */
       }
 
       .animation-layer img {
         display: block;
         max-width: 200px; /* Ensure responsive sizing for images */
         max-height: 200px;
-        width: 15vw; /* Responsive to viewport width */
+        width: 15vw; /* Make images responsive to viewport width */
         height: auto; /* Maintain aspect ratio */
         border-radius: 10%; /* Optional: Add rounded corners */
-        object-fit: cover; /* Ensure image covers its container */
-        transition: transform 0.1s ease-out; /* Add smooth motion effect */
-        opacity: 0.9; /* Add transparency to images */
+        object-fit: cover; /* Ensure image fully shows inside bounds */
+        transition: transform 0.1s ease-out; /* Smooth movement effect */
+        opacity: 0.9;
       }
 
       /* Customize image positions */
@@ -237,8 +241,8 @@
 </head>
 
 <body>
-  <div class="container">
-    <!-- Animated background images -->
+
+   <!-- Animated background images -->
     <div class="animation-layer">
       <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/transpapalrajz%20(1).png">
     </div>
@@ -251,7 +255,9 @@
     <div class="animation-layer">
       <img src="https://raw.githubusercontent.com/shawnbodden/shawnbodden.github.io/refs/heads/main/assets/images/Picture3.png">
     </div>
-
+  
+  <div class="container">
+   
     <div class="about">
       <h1>Shawn Bodden</h1>
       <p>Hi. I'm building a new personal website. This is what I've got so far, but there will be more soon.</p>
