@@ -318,20 +318,6 @@
       </button>
     </div>
 
-<section id="spotlight" class="spotlight-section">
-  <h2>Spotlight: Current Project</h2>
-  <div class="spotlight-container">
-    <div class="spotlight-gif">
-      <img src="spotlight-animation.gif" alt="Spotlight Animation">
-    </div>
-    <div class="rss-preview">
-      <a href="https://shawnbodden.substack.com/sample-post" target="_blank">
-        <img src="project-preview-image.jpg" alt="Substack Feature Preview">
-      </a>
-    </div>
-  </div>
-</section>
-
     <main id="dynamic-content">
       <!-- Academic Portfolio (Hidden by Default) -->
       <section id="academic" class="dynamic-content hidden">
@@ -455,7 +441,6 @@
 <script>
   // Select all gallery buttons and the dynamic content sections
   const buttons = document.querySelectorAll('.gallery-item');
-  const spotlight = document.querySelector('#spotlight');
   const dynamicSections = document.querySelectorAll('.dynamic-content');
 
   // Add event listeners to each button
@@ -468,22 +453,7 @@
       // Hide all dynamic sections
       dynamicSections.forEach((section) => section.classList.add('hidden'));
 
-      // Hide Spotlight and show the corresponding content section
-      spotlight.classList.add('hidden');
-      contentSection.classList.remove('hidden');
     });
-  });
-
-  // Optional: Add a return to Spotlight button
-  const returnToSpotlightButton = document.createElement('button');
-  returnToSpotlightButton.textContent = 'Return to Spotlight';
-  returnToSpotlightButton.style = 'margin: 20px; padding: 10px; background-color: #333; color: #fff;';
-  document.body.appendChild(returnToSpotlightButton);
-
-  returnToSpotlightButton.addEventListener('click', () => {
-    // Re-hide all dynamic sections and show the spotlight section
-    dynamicSections.forEach((section) => section.classList.add('hidden'));
-    spotlight.classList.remove('hidden');
   });
 </script>
   
