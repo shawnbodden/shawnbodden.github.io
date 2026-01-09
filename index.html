@@ -123,6 +123,11 @@
   pointer-events: none; /* Ensure text is not interactable */
 }
 
+    .gallery-item.selected span {
+  font-weight: bold;
+  border-bottom: 2px solid #4a90e2; /* Accent color for selected button */
+}
+
 /* Media Query for Small Screens */
 @media (max-width: 600px) {
   .gallery {
@@ -452,7 +457,15 @@
 
       // Hide all dynamic sections
       dynamicSections.forEach((section) => section.classList.add('hidden'));
+      
+      // Show the selected section
+      if (contentSection) {
+        contentSection.classList.remove('hidden');
 
+        // Update button states
+    buttons.forEach((btn) => btn.classList.remove('selected'));
+    button.classList.add('selected');
+      }
     });
   });
 </script>
